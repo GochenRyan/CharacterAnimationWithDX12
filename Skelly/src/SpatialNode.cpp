@@ -3,16 +3,19 @@
 using namespace DirectX;
 using namespace Skelly;
 
-Skelly::SpatialNode::~SpatialNode()
+template <typename Derived>
+Skelly::SpatialNode<Derived>::~SpatialNode()
 {
 }
 
-void Skelly::SpatialNode::SetParent(std::shared_ptr<SpatialNode> parent)
+template <typename Derived>
+void Skelly::SpatialNode<Derived>::SetParent(std::shared_ptr<Derived> parent)
 {
     mParent = parent;
 }
 
-std::optional<UInt8> SpatialNode::AddChild(std::shared_ptr<SpatialNode> child)
+template <typename Derived>
+std::optional<UInt8> SpatialNode<Derived>::AddChild(std::shared_ptr<Derived> child)
 {
     if (!child || child.get() == this) 
     {
@@ -32,7 +35,8 @@ std::optional<UInt8> SpatialNode::AddChild(std::shared_ptr<SpatialNode> child)
     return static_cast<UInt8>(mChildren.size() - 1);
 }
 
-bool SpatialNode::DeleteChild(std::shared_ptr<SpatialNode> child)
+template <typename Derived>
+bool SpatialNode<Derived>::DeleteChild(std::shared_ptr<Derived> child)
 {
     for (auto it = mChildren.begin(); it != mChildren.end(); ++it) 
     {
@@ -46,7 +50,8 @@ bool SpatialNode::DeleteChild(std::shared_ptr<SpatialNode> child)
     return false;
 }
 
-bool SpatialNode::DeleteChild(UInt8 index)
+template <typename Derived>
+bool SpatialNode<Derived>::DeleteChild(UInt8 index)
 {
     if (index < mChildren.size()) 
     {
@@ -57,7 +62,8 @@ bool SpatialNode::DeleteChild(UInt8 index)
     return false;
 }
 
-std::shared_ptr<SpatialNode> SpatialNode::GetChild(UInt8 index) const
+template <typename Derived>
+std::shared_ptr<Derived> SpatialNode<Derived>::GetChild(UInt8 index) const
 {
     if (index < mChildren.size()) 
     {
@@ -66,12 +72,14 @@ std::shared_ptr<SpatialNode> SpatialNode::GetChild(UInt8 index) const
     return nullptr;
 }
 
-std::vector<std::shared_ptr<SpatialNode>>& SpatialNode::GetAllChild()
+template <typename Derived>
+std::vector<std::shared_ptr<Derived>>& SpatialNode<Derived>::GetAllChild()
 {
     return mChildren;
 }
 
-void Skelly::SpatialNode::UpdateTransform(Float64 dt)
+template <typename Derived>
+void SpatialNode<Derived>::UpdateTransform(Float64 dt)
 {
     auto sp = mParent.lock();
     if (sp && sp->mIsChanged)

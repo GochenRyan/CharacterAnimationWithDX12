@@ -9,7 +9,8 @@
 
 namespace Skelly
 {
-    class SKELLY_API SpatialNode : public std::enable_shared_from_this<SpatialNode>
+    template<typename Derived>
+    class SKELLY_API SpatialNode : public std::enable_shared_from_this<Derived>
     {
     public:
         SpatialNode() = default;
@@ -20,18 +21,18 @@ namespace Skelly
         virtual ~SpatialNode();
 
     public:
-        void SetParent(std::shared_ptr<SpatialNode> parent);
-        virtual std::optional<UInt8> AddChild(std::shared_ptr<SpatialNode> child);
-        virtual bool DeleteChild(std::shared_ptr<SpatialNode> child);
+        void SetParent(std::shared_ptr<Derived> parent);
+        virtual std::optional<UInt8> AddChild(std::shared_ptr<Derived> child);
+        virtual bool DeleteChild(std::shared_ptr<Derived> child);
         virtual bool DeleteChild(UInt8 index);
-        std::shared_ptr<SpatialNode> GetChild(UInt8 index) const;
-        std::vector<std::shared_ptr<SpatialNode>>& GetAllChild();
+        std::shared_ptr<Derived> GetChild(UInt8 index) const;
+        std::vector<std::shared_ptr<Derived>>& GetAllChild();
         void UpdateTransform(Float64 dt);
     protected:
-        DirectX::XMFLOAT4X4 mWorld = MathHelper::Identity4x4();
-        DirectX::XMFLOAT4X4 mLocal = MathHelper::Identity4x4();
-        std::weak_ptr<SpatialNode> mParent;
-        std::vector<std::shared_ptr<SpatialNode>> mChildren;
-        bool mIsChanged;
+        DirectX::XMFLOAT4X4 mWorld{MathHelper::Identity4x4()};
+        DirectX::XMFLOAT4X4 mLocal{MathHelper::Identity4x4()};
+        std::weak_ptr<Derived> mParent;
+        std::vector<std::shared_ptr<Derived>> mChildren;
+        bool mIsChanged{false};
     };
 }
