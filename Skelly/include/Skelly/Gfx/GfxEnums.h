@@ -66,4 +66,21 @@ namespace Skelly
         MATERIAL_INSTANCE,
         MAX
     };
+
+    enum class GfxMeshDataType : UInt8
+    {
+        POINT,
+        LINE,
+        TRIANGLE,
+        CONTROL_POINT_4,
+        MAX
+    };
+
+    enum class GfxLineType : UInt8
+    {
+        OPEN,
+        CLOSE,
+        SEGMENT,
+        MAX
+    };
 }

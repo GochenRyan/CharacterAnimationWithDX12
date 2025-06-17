@@ -5,8 +5,6 @@
 
 namespace Skelly
 {
-    
-
     class SKELLY_API VertexFormat
     {
     public:

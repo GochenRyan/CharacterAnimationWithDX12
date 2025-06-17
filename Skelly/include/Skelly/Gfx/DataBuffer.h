@@ -7,8 +7,13 @@ namespace Skelly
     class SKELLY_API DataBuffer
     {
     public:
-        DataBuffer();
+        DataBuffer() = default;
         virtual ~DataBuffer();
+        DataBuffer(const DataBuffer&) = delete;
+        DataBuffer& operator=(const DataBuffer&) = delete;
+        DataBuffer(DataBuffer&& other) noexcept;
+
+        DataBuffer& operator=(DataBuffer&& other) noexcept;
     private:
         UInt8 mDataType{static_cast<UInt8>(GfxDataType::UINT)};
         UInt32 mCount{0};

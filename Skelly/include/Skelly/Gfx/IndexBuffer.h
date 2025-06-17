@@ -10,8 +10,12 @@ namespace Skelly
     class SKELLY_API IndexBuffer
     {
     public:
-        IndexBuffer();
-        virtual ~IndexBuffer();
+        IndexBuffer() = default;
+        virtual ~IndexBuffer() = default;
+        IndexBuffer(const IndexBuffer&) = delete;
+        IndexBuffer& operator=(const IndexBuffer&) = delete;
+        IndexBuffer(IndexBuffer&&) = default;
+        IndexBuffer& operator=(IndexBuffer&&) = default;
     private:
         std::unique_ptr<DataBuffer> mData;
         UInt8 mDataType{static_cast<UInt8>(GfxDataType::UINT)};
