@@ -1,9 +1,10 @@
 #pragma once
-#include <Skelly/SpatialNode.h>
+#include <Skelly/Gfx/Node.h>
 
 namespace Skelly
 {
-    class SKELLY_API MeshNode : public SpatialNode<MeshNode>
+    template<typename ChildType>
+    class SKELLY_API MeshNode : public Node
     {
     public:
         MeshNode() = default;
@@ -11,5 +12,9 @@ namespace Skelly
         MeshNode(MeshNode&& other) = default;
         MeshNode& operator=(const MeshNode& other) = delete;
         MeshNode& operator=(MeshNode&& other) = default;
+    public:
+        bool IsReceiveShadow;
+        bool IsCastShadow;
+        bool IsLighted;
     };
 }

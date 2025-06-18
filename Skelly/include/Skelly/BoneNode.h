@@ -1,11 +1,11 @@
 #pragma once
-#include <Skelly/SpatialNode.h>
+#include <Skelly/Gfx/Node.h>
 
 namespace Skelly
 {
     class Skeleton;
 
-    class SKELLY_API BoneNode : public SpatialNode<BoneNode>
+    class SKELLY_API BoneNode : public Node<BoneNode>
     {
     public:
         BoneNode() = default;

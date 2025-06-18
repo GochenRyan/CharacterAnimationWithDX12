@@ -1,5 +1,5 @@
 #pragma once
-#include <Skelly/ModelMeshNode.h>
+#include <Skelly/Gfx/ModelMeshNode.h>
 #include <Skelly/Skeleton.h>
 
 namespace Skelly

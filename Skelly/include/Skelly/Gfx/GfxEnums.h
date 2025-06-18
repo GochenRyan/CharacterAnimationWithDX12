@@ -83,4 +83,19 @@ namespace Skelly
         SEGMENT,
         MAX
     };
+
+    enum class GfxLODType : UInt8
+    {
+        NONE,
+        DLOD,
+        CLOD,
+        MAX
+    };
+
+    enum class FBXType : UInt8
+    {
+        STATIC_MESH,
+        SKELETON_MESH,
+        ACTION
+    };
 }
