@@ -1,6 +1,7 @@
 #pragma once
 #include <Skelly/Core/Skelly.h>
 #include <Skelly/Gfx/GfxEnums.h>
+#include <Skelly/Gfx/DataBuffer.h>
 #include <memory>
 
 namespace Skelly

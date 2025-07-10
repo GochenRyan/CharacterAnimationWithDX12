@@ -2,8 +2,6 @@ project(SkeletonStructure)
 
 set(FBX_RESOURCES_DIR "${CMAKE_SOURCE_DIR}/Resources/FBX")
 
-find_package(FBXSDK REQUIRED)
-
 file(GLOB_RECURSE src CONFIGURE_DEPENDS src/*cpp include/*.h)
 
 add_executable(SkeletonStructure ${src})

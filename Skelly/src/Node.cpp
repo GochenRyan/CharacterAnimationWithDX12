@@ -1,11 +1,14 @@
 #include <Skelly/Gfx/Node.h>
+#include <Skelly/BoneNode.h>
+#include <Skelly/Gfx/Geometry.h>
+#include <Skelly/Gfx/GeometryNode.h>
 
 using namespace Skelly;
 
 template <typename ChildType>
 std::optional<UInt8> Node<ChildType>::AddChild(std::shared_ptr<ChildType> child)
 {
-    if (!child || child.get() == this) 
+    if (!child || static_cast<SpatialNode*>(child.get()) == this) 
     {
         return std::nullopt;
     }
@@ -17,7 +20,7 @@ std::optional<UInt8> Node<ChildType>::AddChild(std::shared_ptr<ChildType> child)
         }
     }
 
-    child->mParent = shared_from_this();
+    child->mParent = this->shared_from_this();
     mChildren.push_back(child);
 
     return static_cast<UInt8>(mChildren.size() - 1);
@@ -64,4 +67,11 @@ template <typename ChildType>
 std::vector<std::shared_ptr<ChildType>>& Node<ChildType>::GetAllChild()
 {
     return mChildren;
+}
+
+
+template <typename ChildType>
+void Skelly::Node<ChildType>::UpdateNodeAll(Float64 dt)
+{
+
 }

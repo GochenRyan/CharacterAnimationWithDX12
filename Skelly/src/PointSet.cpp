@@ -10,5 +10,5 @@ UInt8 PointSet::GetMeshDataType()
 
 bool PointSet::CreateIndex()
 {
-    
+    return false;
 }

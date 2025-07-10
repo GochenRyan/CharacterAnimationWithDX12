@@ -19,6 +19,6 @@ namespace Skelly
             return msDefault.get();
         }
     private:
-        static std::unique_ptr<StaticMeshNode> msDefault;
+        static inline std::unique_ptr<StaticMeshNode> msDefault = nullptr;
     };
 }

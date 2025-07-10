@@ -4,7 +4,7 @@
 namespace Skelly
 {
     template<typename ChildType>
-    class SKELLY_API MeshNode : public Node
+    class SKELLY_API MeshNode : public Node<ChildType>
     {
     public:
         MeshNode() = default;
@@ -12,6 +12,7 @@ namespace Skelly
         MeshNode(MeshNode&& other) = default;
         MeshNode& operator=(const MeshNode& other) = delete;
         MeshNode& operator=(MeshNode&& other) = default;
+        virtual ~MeshNode() = default;
     public:
         bool IsReceiveShadow;
         bool IsCastShadow;

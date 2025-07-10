@@ -1,5 +1,6 @@
 #pragma once
 #include <Skelly/Gfx/SpatialNode.h>
+#include <Skelly/Gfx/MeshData.h>
 
 namespace Skelly
 {
@@ -9,6 +10,7 @@ namespace Skelly
     {
     public:
         Geometry() = default;
+        virtual ~Geometry() = default;
         Geometry(const Geometry& other) = delete;
         Geometry(Geometry&& other) = default;
         Geometry& operator=(const Geometry& other) = delete;

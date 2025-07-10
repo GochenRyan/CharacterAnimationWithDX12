@@ -1,6 +1,6 @@
 #pragma once
 #include <DirectXMath.h>
-#include <MathHelper.h>
+#include <Common/MathHelper.h>
 #include <memory>
 #include <optional>
 #include <vector>
@@ -21,10 +21,15 @@ namespace Skelly
     public:
         void SetParent(std::shared_ptr<SpatialNode> parent);
         void UpdateTransform(Float64 dt);
+        void SetLocalRotate(const DirectX::XMFLOAT4X4& rotate);
+        virtual void UpdateAll(Float64 dt);
     protected:
-        std::weak_ptr<SpatialNode> mParent;
+        virtual void UpdateNodeAll(Float64 dt) = 0;
+    protected:
         DirectX::XMFLOAT4X4 mWorld{MathHelper::Identity4x4()};
         DirectX::XMFLOAT4X4 mLocal{MathHelper::Identity4x4()};
         bool mIsChanged{false};
+    public:
+        std::weak_ptr<SpatialNode> mParent;
     };
 }

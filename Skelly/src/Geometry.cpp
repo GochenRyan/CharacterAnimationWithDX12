@@ -1,4 +1,5 @@
 #include <Skelly/Gfx/Geometry.h>
+
 using namespace Skelly;
 
 void Geometry::SetMeshData(std::unique_ptr<MeshData> meshData)

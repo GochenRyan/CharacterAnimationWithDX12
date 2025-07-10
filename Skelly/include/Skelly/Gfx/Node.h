@@ -4,8 +4,12 @@
 
 namespace Skelly
 {
+    class BoneNode;
+    class Geometry;
+    class GeometryNode;
+
     template<typename ChildType>
-    class SKELLY_API Node : public SpatialNode, public std::enable_shared_from_this<Node>
+    class Node : public SpatialNode, public std::enable_shared_from_this<ChildType>
     {
     public:
         Node() = default;
@@ -21,6 +25,12 @@ namespace Skelly
         std::shared_ptr<ChildType> GetChild(UInt8 index) const;
         std::vector<std::shared_ptr<ChildType>>& GetAllChild();
     protected:
+        void UpdateNodeAll(Float64 dt) override;
+    protected:
         std::vector<std::shared_ptr<ChildType>> mChildren;
     };
+
+    template class SKELLY_API Node<BoneNode>;
+    template class SKELLY_API Node<Geometry>;
+    template class SKELLY_API Node<GeometryNode>;
 }

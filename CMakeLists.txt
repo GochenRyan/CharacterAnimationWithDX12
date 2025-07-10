@@ -26,7 +26,10 @@ if (WIN32)
     add_definitions(-DNOMINMAX -D_USE_MATH_DEFINES)
 endif()
 
+find_package(FBXSDK REQUIRED)
+
 add_subdirectory(Common)
+add_subdirectory(Skelly)
 add_subdirectory(SkeletonStructure)
 
 copy_all_files_to_build(${FBXSDK_LIB_DIR})

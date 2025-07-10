@@ -1,13 +1,12 @@
 #pragma once
 #include <Skelly/Core/Skelly.h>
 #include <Skelly/Gfx/GfxEnums.h>
+#include <Skelly/Gfx/IndexBuffer.h>
+#include <Skelly/Gfx/VertexBuffer.h>
 #include <memory>
 
 namespace Skelly
 {
-    class IndexBuffer;
-    class VertexBuffer;
-
     class SKELLY_API MeshData
     {
     public:

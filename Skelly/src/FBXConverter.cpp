@@ -3,6 +3,17 @@
 
 using namespace Skelly;
 
+namespace
+{
+    DirectX::XMFLOAT4X4 MayaToDX12(
+        1.0f, 0.0f, 0.0f, 0.0f,
+        0.0f, 1.0f, 0.0f, 0.0f,
+        0.0f, 0.0f, -1.0f, 0.0f,
+        0.0f, 0.0f, 0.0f, 1.0f
+    );
+}
+
+
 bool Skelly::FBXConverter::ExportFile(std::string_view src, std::string_view dst)
 {
     // Check the file format
@@ -26,8 +37,8 @@ bool Skelly::FBXConverter::ExportFile(std::string_view src, std::string_view dst
     {
         case ExportType::STATIC_MESH:
         {
-            mNode = std::make_shared<StaticMeshNode>();
-            mGeometryNode = std::make_shared<GeometryNode>();
+            // mNode = std::make_shared<StaticMeshNode>();
+            // mGeometryNode = std::make_shared<GeometryNode>();
         }
     }
 
@@ -50,6 +61,27 @@ bool FBXConverter::InitFBX()
 
     // Create a new scene so that it can be populated by the imported file.
     mFbxScene = FbxScene::Create(mFbxManager, "");
+
+    FbxGlobalSettings& globalSettings = mFbxScene->GetGlobalSettings();
+    if (globalSettings.GetAxisSystem() != FbxAxisSystem::DirectX)
+    {
+        FbxAxisSystem::DirectX.ConvertScene(mFbxScene);
+    }
+
+    FbxSystemUnit systemUnit = globalSettings.GetSystemUnit();
+    if (systemUnit != FbxSystemUnit::m)
+    {
+        const FbxSystemUnit::ConversionOptions options = {
+            false,
+            true,
+            true,
+            true,
+            true,
+            true
+        };
+
+        FbxSystemUnit::m.ConvertScene(mFbxScene, options);
+    }
 
     return true;
 }

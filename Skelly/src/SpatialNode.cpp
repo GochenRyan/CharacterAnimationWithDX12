@@ -29,3 +29,15 @@ void SpatialNode::UpdateTransform(Float64 dt)
             mWorld = mLocal;
     }
 }
+
+void SpatialNode::SetLocalRotate(const DirectX::XMFLOAT4X4& rotate)
+{
+    mIsChanged = true;
+    // mLocal = rotate;
+    UpdateAll(0.0f);
+}
+
+void Skelly::SpatialNode::UpdateAll(Float64 dt)
+{
+    UpdateNodeAll(dt);
+}

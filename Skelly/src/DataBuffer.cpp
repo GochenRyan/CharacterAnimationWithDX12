@@ -1,5 +1,4 @@
 #include <Skelly/Gfx/DataBuffer.h>
-#include "DataBuffer.h"
 
 using namespace Skelly;
 
@@ -9,7 +8,7 @@ DataBuffer::~DataBuffer()
     mData = nullptr;
 }
 
-DataBuffer::DataBuffer(DataBuffer&& other) : 
+DataBuffer::DataBuffer(DataBuffer&& other) noexcept : 
     mDataType(other.mDataType),
     mCount(other.mCount),
     mData(other.mData),
@@ -19,7 +18,7 @@ DataBuffer::DataBuffer(DataBuffer&& other) :
     other.mData = nullptr;
 }
 
-DataBuffer& DataBuffer::operator=(DataBuffer&& other) 
+DataBuffer& DataBuffer::operator=(DataBuffer&& other) noexcept
 {
     if (this != &other) 
     {
